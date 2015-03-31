@@ -10,8 +10,10 @@ public class Driver
 		bt.add(1);
 		bt.add(0);
 		bt.add(3);
-		bt.displayInOrder();
-		bt.displayPostOrder();
+		//bt.displayInOrder();
+		//bt.displayPostOrder();
+		//bt.displayPreOrder();
+		System.out.println(bt.search(2));
 
 	}
 }
