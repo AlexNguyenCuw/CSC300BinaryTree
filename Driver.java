@@ -1,19 +1,19 @@
+import java.util.Random;
+
 
 public class Driver 
 {
 	public static void main(String[] args) 
-	{
-		BinaryTree bt = new BinaryTree();
-		bt.add(2);
-		bt.add(5);
-		bt.add(7);
-		bt.add(1);
-		bt.add(0);
-		bt.add(3);
-		//bt.displayInOrder();
-		//bt.displayPostOrder();
-		//bt.displayPreOrder();
-		System.out.println(bt.search(2));
-
-	}
+		{
+			Random r = new Random();
+			BinaryTree bt = new BinaryTree();
+			for(int i = 0; i < 100; i++)
+			{
+				bt.add(r.nextInt());
+				bt.avlBalance();
+			}
+			System.out.println(bt.isBalanced());
+			bt.displayInOrder();
+		}
+	
 }
