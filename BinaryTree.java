@@ -22,16 +22,16 @@ public class BinaryTree
 		this.parent = null;
 	}
 	
-	private void changeDepth(int amount)
+	private void updateDepths(int newDepth)
 	{
-		this.depth += amount;
+		this.depth = newDepth;
 		if(this.leftTree != null)
 		{
-			this.leftTree.changeDepth(amount);
+			this.leftTree.updateDepths(this.depth+1);
 		}
 		if(this.rightTree != null)
 		{
-			this.rightTree.changeDepth(amount);
+			this.rightTree.updateDepths(this.depth+1);
 		}
 	}
 	
@@ -82,6 +82,9 @@ public class BinaryTree
 		//new parent is
 		pivot.rightTree = pivP;
 		pivP.parent = pivot;
+		
+		//update all of the depths under pivot
+		pivot.updateDepths(pivot.depth-1);
 	}
 	
 	private void rotateLeft(BinaryTree pivot)
@@ -131,6 +134,9 @@ public class BinaryTree
 		//new parent is
 		pivot.leftTree = pivP;
 		pivP.parent = pivot;
+		
+		//update all of the depths under pivot
+		pivot.updateDepths(pivot.depth-1);
 	}
 	
 	public boolean search(int value)
@@ -318,6 +324,42 @@ public class BinaryTree
 					this.rightTree.parent = this;
 				}
 				this.rightTree.add(value);
+			}
+		}
+		
+		//am I the top level root tree?
+		if(this.parent == null)
+		{
+			//do we need to rebalance?
+			if(!this.isBalanced())
+			{
+				if(this.leftTree == null)
+				{
+					//the right tree is out of balance
+					this.rightTree.rotateRight(this.rightTree.leftTree);
+					//missing a line
+				}
+				else if(this.rightTree == null)
+				{
+					//the left tree is out of balance
+					this.leftTree.rotateLeft(this.leftTree.rightTree);
+					//missing a line
+				}
+				else
+				{
+					//we know we have a left and a right tree
+					if(this.leftTree.getMaxDepth() > this.rightTree.getMaxDepth())
+					{
+						this.leftTree.rotateLeft(this.leftTree.rightTree);
+						//missing a line
+						
+					}
+					else
+					{
+						this.rightTree.rotateRight(this.rightTree.leftTree);
+						//missing a line
+					}
+				}
 			}
 		}
 	}
