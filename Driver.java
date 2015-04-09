@@ -10,10 +10,9 @@ public class Driver
 			for(int i = 0; i < 100; i++)
 			{
 				bt.add(r.nextInt());
-				bt.avlBalance();
 			}
 			System.out.println(bt.isBalanced());
-			bt.displayInOrder();
+			//bt.displayInOrder();
 		}
 	
 }
