@@ -337,28 +337,71 @@ public class BinaryTree
 					if(this.leftTree == null)
 					{
 						//the right tree is out of balance
-						this.rightTree.rotateRight(this.rightTree.leftTree);
-						//missing a line
-					}
-					else if(this.rightTree == null)
-					{
-						//the left tree is out of balance
-						this.leftTree.rotateLeft(this.leftTree.rightTree);
-						//missing a line
-					}
-					else
-					{
-						//we know we have a left and a right tree
-						if(this.leftTree.getMaxDepth() > this.rightTree.getMaxDepth())
+						if(this.rightTree.leftTree == null)
 						{
-							this.leftTree.rotateLeft(this.leftTree.rightTree);
-							//missing a line
-							
+							this.rightTree.rotateLeft(this.rightTree);
 						}
 						else
 						{
-							this.rightTree.rotateRight(this.rightTree.leftTree);
+							this.leftTree.rotateRight(this.rightTree.leftTree);
+							this.rightTree.rotateLeft(this.rightTree);
 							//missing a line
+						}
+						
+					}
+					else if(this.rightTree == null)
+					{
+						if(this.leftTree.rightTree == null)
+						{
+							this.rightTree.rotateLeft(this.leftTree);
+						}
+						else
+						{
+							//the left tree is out of balance
+							this.leftTree.rotateLeft(this.leftTree.rightTree);
+							this.leftTree.rotateRight(this.leftTree);
+							//missing a line
+						}
+						
+					}
+					else
+					{
+						//we know we have a left + right tree
+						if(this.leftTree.getMaxDepth() > this.rightTree.getMaxDepth())
+						{
+							if(this.leftTree.rightTree == null)
+							{
+								this.rightTree.rotateLeft(this.leftTree.leftTree);
+							}
+							else if(this.leftTree.rightTree != null && this.leftTree.leftTree != null)
+							{
+								this.leftTree.rotateRight(this.leftTree);
+							}
+							else
+							{
+								this.leftTree.rotateLeft(this.leftTree.rightTree);
+								this.leftTree.rotateRight(this.leftTree);
+								//missing a line
+							}
+						}
+						else
+						{
+							if(this.rightTree.leftTree == null)
+							{
+								this.rightTree.rotateLeft(this.rightTree.rightTree);
+							}
+							else if (this.rightTree.leftTree != null && this.rightTree.rightTree != null)
+							{
+								this.rightTree.rotateLeft(this.rightTree);
+								
+							}
+							else
+							{
+								this.rightTree.rotateRight(this.rightTree.leftTree);
+								this.rightTree.rotateLeft(this.rightTree);
+								//missing a line
+							}
+							
 						}
 					}
 				}
